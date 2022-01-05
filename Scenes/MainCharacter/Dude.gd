@@ -28,7 +28,6 @@ func _physics_process(_delta):
 		if is_on_floor():
 			$AnimatedSprite.play("run")
 	elif is_on_floor():
-	
 		$AnimatedSprite.play("idle")
 	
 	if is_on_wall() and Input.is_action_pressed("climb"):
