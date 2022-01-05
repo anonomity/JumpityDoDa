@@ -68,21 +68,6 @@ flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 470, 0, 94, 94 )
 
-[sub_resource type="AtlasTexture" id=21]
-flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 79, 94 )
-
-[sub_resource type="AtlasTexture" id=22]
-flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 79, 0, 79, 94 )
-
-[sub_resource type="AtlasTexture" id=23]
-flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 158, 0, 79, 94 )
-
 [sub_resource type="AtlasTexture" id=15]
 flags = 4
 atlas = ExtResource( 5 )
@@ -97,6 +82,21 @@ region = Rect2( 145, 0, 145, 94 )
 flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 290, 0, 145, 94 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 79, 94 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 79, 0, 79, 94 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 158, 0, 79, 94 )
 
 [sub_resource type="AtlasTexture" id=18]
 flags = 4
@@ -130,14 +130,14 @@ animations = [ {
 "name": "run",
 "speed": 15.0
 }, {
-"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
-"loop": true,
-"name": "climb",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "dash",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"loop": true,
+"name": "climb",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
@@ -146,19 +146,23 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=8]
-radius = 8.55501
-height = 63.2899
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 10, 40 )
 
 [node name="Dude" type="KinematicBody2D"]
+z_index = 10
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
-animation = "climb"
+animation = "idle"
 frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.61721, -1.05812 )
-shape = SubResource( 8 )
+position = Vector2( 0, 7 )
+shape = SubResource( 24 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
