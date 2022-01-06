@@ -68,6 +68,10 @@ climb={
 
 2d_physics/layer_1="ground"
 2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="item"
+2d_physics/layer_5="fallzone"
+2d_physics/layer_6="fireball"
 
 [physics]
 

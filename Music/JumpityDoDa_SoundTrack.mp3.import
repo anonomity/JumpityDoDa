@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/JumpityDoDa_SoundTrack.mp3-585f0160d2288f63f2eec4dce2d0a759.mp3str"
+
+[deps]
+
+source_file="res://Music/JumpityDoDa_SoundTrack.mp3"
+dest_files=[ "res://.import/JumpityDoDa_SoundTrack.mp3-585f0160d2288f63f2eec4dce2d0a759.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

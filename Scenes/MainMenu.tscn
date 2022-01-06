@@ -6,10 +6,10 @@
 
 [sub_resource type="Theme" id=1]
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.858824, 0.847059, 0.65098, 1 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.890196, 0.956863, 0.101961, 0.415686 )
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -17,19 +17,19 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_color = Color( 1, 1, 1, 0.6 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 13
 extra_spacing_top = 3
 extra_spacing_bottom = 3
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.866667, 0.878431, 0.72549, 1 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.858824, 0.854902, 0.65098, 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=7]
 size = 60
 outline_size = 2
 outline_color = Color( 0.0627451, 0.14902, 0.376471, 1 )
@@ -68,18 +68,18 @@ __meta__ = {
 margin_right = 182.0
 margin_bottom = 21.0
 focus_neighbour_top = NodePath("../Quit")
-custom_styles/hover = SubResource( 5 )
-custom_styles/normal = SubResource( 2 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "start"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
 margin_top = 25.0
 margin_right = 182.0
 margin_bottom = 46.0
-custom_styles/hover = SubResource( 6 )
-custom_styles/normal = SubResource( 2 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "options"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -90,9 +90,9 @@ margin_top = 50.0
 margin_right = 182.0
 margin_bottom = 71.0
 focus_neighbour_bottom = NodePath("../Start")
-custom_styles/hover = SubResource( 7 )
-custom_styles/normal = SubResource( 2 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "quit"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -107,7 +107,7 @@ margin_top = -205.169
 margin_right = -133.922
 margin_bottom = -85.1686
 rect_pivot_offset = Vector2( -203.799, 60.4001 )
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 7 )
 tab_size = 10
 text = "jumpity do da"
 __meta__ = {

@@ -20,11 +20,13 @@ var move_direction := Vector2.ZERO
 var dash_driection := Vector2.ZERO		# Can't do anything until it's ZERO
 var can_dash := false					# Can't dash until true
 var dash_time := 0.0					# Resets dash_direction to ZERO when dash time reaches MAX_DASH_TIME
+var dash_state = false
 
 onready var sprite := $AnimatedSprite as AnimatedSprite
 
 
 func _physics_process(_delta: float) -> void:
+	
 	if dash_driection == Vector2.ZERO:
 		input_direction()
 		
@@ -51,6 +53,7 @@ func _physics_process(_delta: float) -> void:
 		
 		# Climbing
 		if next_to_wall() and Input.is_action_pressed("climb"):
+			
 			
 			sprite.play("climb")
 			velocity.y = -SPEED
@@ -159,4 +162,6 @@ func fall() -> void:
 func _on_Reset_body_entered(_body: Node) -> void:
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/Level1.tscn")
+
+
 
