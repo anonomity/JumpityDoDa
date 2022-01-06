@@ -1,75 +1,130 @@
 extends KinematicBody2D
-
-var velocity = Vector2 (0,0)
-const SPEED = 250
-const JUMPFORCE = -750
-
-const GRAVITY = 2200
-const DASHFORCE = 5000
-const DASHJUMP = -900
-var regen_dash = true
+# Player (Dude)
 
 
+const GRAVITY := 2200.0
+const SPEED := 250.0
+const JUMPFORCE := -750.0
+const DASHFORCE := 2000.0
+const DASHJUMP := -800.0
+const MAX_DASH_TIME := 0.1				# Dash time
+
+var gravity := GRAVITY
+var velocity := Vector2.ZERO
+var move_direction := Vector2.ZERO
+var dash_driection := Vector2.ZERO		# Can't do anything until it's ZERO
+var can_dash := false					# Can't dash until true
+var dash_time := 0.0					# Resets dash_direction to ZERO when dash time reaches MAX_DASH_TIME
+
+onready var sprite := $AnimatedSprite as AnimatedSprite
 
 
-func _physics_process(_delta):
+func _physics_process(_delta: float) -> void:
+	if dash_driection == Vector2.ZERO:
+		input_direction()
+		
+		# Moving
+		if move_direction.x == -1:
+			sprite.flip_h = true
+			velocity.x = -SPEED
+			if is_on_floor():
+				sprite.play("run")
+			else:
+				fall()
+		elif move_direction.x == 1:
+			velocity.x = SPEED
+			sprite.flip_h = false
+			if is_on_floor():
+				sprite.play("run")
+			else:
+				fall()
+		else:
+			if is_on_floor():
+				sprite.play("idle")
+			else:
+				fall()
+		
+		# Climbing
+		if is_on_wall() and Input.is_action_pressed("climb"):
+			sprite.play("climb")
+			velocity.y = -SPEED
+			gravity = 0
+		else:
+			gravity = GRAVITY
+			velocity.y += gravity * _delta
+		
+		# Jumping
+		if Input.is_action_just_pressed("jump") and is_on_floor() :
+			sprite.play("jump")
+			velocity.y = JUMPFORCE
+		# Variable jump
+		if Input.is_action_just_released("jump") and velocity.y < 0:
+			velocity.y = lerp(velocity.y, 0, 0.5)
 	
-	if Input.is_action_pressed("left"):
-		$AnimatedSprite.flip_h = true
-		velocity.x = -SPEED
-		if is_on_floor():
-			$AnimatedSprite.play("run")
-			
+	# Dashing
+	if Input.is_action_just_pressed("dash") and can_dash and dash_time < MAX_DASH_TIME:
+		velocity = Vector2.ZERO
+		gravity = 0
+		if move_direction.y == -1:
+			dash_driection = Vector2.UP
+		else:
+			if sprite.flip_h:
+				dash_driection = Vector2.LEFT
+			else:
+				dash_driection = Vector2.RIGHT
 		
-	elif Input.is_action_pressed("right"):
-		
-		velocity.x = SPEED
-		$AnimatedSprite.flip_h = false
-		if is_on_floor():
-			$AnimatedSprite.play("run")
-	elif is_on_floor():
-		$AnimatedSprite.play("idle")
+		can_dash = false
 	
-	if is_on_wall() and Input.is_action_pressed("climb"):
-		$AnimatedSprite.play("climb")
-		velocity.x += GRAVITY * _delta
-	else:
-		velocity.y += GRAVITY * _delta
+	# Dashing update
+	if dash_driection != Vector2.ZERO:
+		dash_time += _delta
 		
-	if Input.is_action_pressed("dash") and Input.is_action_pressed("left") and regen_dash:
-		$AnimatedSprite.play("dash")
-		regen_dash= false
-		velocity.x = -DASHFORCE
-	if Input.is_action_pressed("dash") and Input.is_action_pressed("right") and regen_dash:
-		$AnimatedSprite.flip_h = false
-		regen_dash= false
-		$AnimatedSprite.play("dash")
-		velocity.x = DASHFORCE
-	if Input.is_action_pressed("dash") and Input.is_action_pressed("up") and regen_dash: 
-		$AnimatedSprite.play("dashup")
-		regen_dash= false
-		velocity.y = DASHJUMP
-	if Input.is_action_pressed("up") and is_on_floor() :
-		$AnimatedSprite.play("jump")
-		velocity.y = JUMPFORCE
+		if dash_driection == Vector2.UP:
+			# Vertical dashing
+			sprite.play("dashup")
+			velocity.y = DASHJUMP
+		else:
+			# Horizontal dashing
+			sprite.play("dash")
+			velocity.x = DASHFORCE * get_look_direction()
+		
+	if dash_time > MAX_DASH_TIME:
+		dash_driection = Vector2.ZERO
+		dash_time = 0
 		
 	if is_on_floor():
-		regen_dash= true
+		can_dash = true
 	
-		
-	
+	# Update moving
 	velocity = move_and_slide(velocity, Vector2.UP)
-	velocity.x = lerp(velocity.x, 0, 0.1)
-	
-	
-	
-	
-	
-	
+	velocity.x = lerp(velocity.x, 0, 0.5)
 
 
+# Player input direction
+func input_direction() -> void:
+	move_direction.x = float(Input.is_action_pressed("right")) - float(Input.is_action_pressed("left"))
+	move_direction.y = float(Input.is_action_pressed("down")) - float(Input.is_action_pressed("up"))
 
 
-func _on_Area2D_body_entered(body):
+# Player look direction using the sprite flip
+func get_look_direction() -> int:
+		var look_direction := 1
+		if sprite.flip_h:
+			look_direction = -1
+		return look_direction
 
+
+# Fall animation (just using jump single frame 2)
+func fall() -> void:
+	if sprite.animation == "jump" or sprite.animation == "climb":
+		return
+		
+	sprite.animation = "jump"
+	sprite.frame = 2
+
+
+# On fall death, reset the level
+func _on_Reset_body_entered(_body: Node) -> void:
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/Level1.tscn")
+
