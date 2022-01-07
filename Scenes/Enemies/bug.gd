@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var velocity = Vector2()
 var direction = -1
+
 func _ready():
 	if direction == 1:
 		$AnimatedSprite.flip_h = true
@@ -30,7 +31,18 @@ func _physics_process(delta):
 func _on_top_checker_body_entered(body):
 	
 	if body.dash_time != 0:
+		Variables.inc_score(30)
+		$EnemyDieAudio.play()
 		queue_free()
 	else:
+		$PlayerDie.play()
+		
+	
+
+
+func _on_PlayerDie_finished():
+	if(Variables.currentLevel == 1):
 		get_tree().change_scene("res://Scenes/Level1.tscn")
+	elif(Variables.currentLevel == 2):
+		get_tree().change_scene("res://Scenes/Level22.tscn")
 	

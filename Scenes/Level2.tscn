@@ -1,0 +1,172 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Assets/TileSet/stone.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/MainCharacter/Dude.tscn" type="PackedScene" id=2]
+[ext_resource path="res://BG/BlueSky.png" type="Texture" id=3]
+[ext_resource path="res://Assets/TileSet/yellowBrick.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environment/potato.png" type="Texture" id=5]
+[ext_resource path="res://Audio/JumpityDoDa_SoundTrack2.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Scripts/Level.gd" type="Script" id=9]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+
+[sub_resource type="TileSet" id=5]
+0/name = "stone.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "yellowBrick.png 1"
+1/texture = ExtResource( 4 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 4 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 3000, 100 )
+
+[node name="level2" type="Node2D"]
+script = ExtResource( 9 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 5 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 196619, 1, 0, 196620, 1, 0, 196630, 1, 0, 196631, 1, 0, 196632, 1, 0, 196633, 1, 0, 196634, 1, 0, 196635, 1, 0, 196636, 1, 0, 196637, 1, 0, 196638, 1, 0, 196639, 1, 0, 196640, 1, 0, 196641, 1, 0, 196642, 1, 0, 196643, 1, 0, 196644, 1, 0, 196645, 1, 0, 196646, 1, 0, 196647, 1, 0, 196648, 1, 0, 196649, 1, 0, 196650, 1, 0, 196651, 1, 0, 262155, 1, 0, 262156, 1, 0, 262166, 1, 0, 262167, 1, 0, 262168, 1, 0, 262169, 1, 0, 262170, 1, 0, 262171, 1, 0, 262172, 1, 0, 262173, 1, 0, 262174, 1, 0, 262175, 1, 0, 262176, 1, 0, 262177, 1, 0, 262178, 1, 0, 262179, 1, 0, 262180, 1, 0, 262181, 1, 0, 262182, 1, 0, 262183, 1, 0, 262184, 1, 0, 262185, 1, 0, 262186, 1, 0, 262187, 1, 0, 327691, 1, 0, 327692, 1, 0, 327702, 1, 0, 327703, 1, 0, 393227, 1, 0, 393228, 1, 0, 393238, 1, 0, 393239, 1, 0, 458763, 1, 0, 458764, 1, 0, 458774, 1, 0, 458775, 1, 0, 524299, 1, 0, 524300, 1, 0, 524310, 1, 0, 524311, 1, 0, 589835, 1, 0, 589836, 1, 0, 589846, 1, 0, 589847, 1, 0, 655371, 1, 0, 655372, 1, 0, 655382, 1, 0, 655383, 1, 0, 720907, 1, 0, 720908, 1, 0, 720918, 1, 0, 720919, 1, 0, 786443, 1, 0, 786444, 1, 0, 786454, 1, 0, 786455, 1, 0, 851979, 1, 0, 851980, 1, 0, 851990, 1, 0, 851991, 1, 0, 917515, 1, 0, 917516, 1, 0, 917517, 1, 0, 917518, 1, 0, 917519, 1, 0, 917520, 1, 0, 917521, 1, 0, 917522, 1, 0, 917523, 1, 0, 917524, 1, 0, 917525, 1, 0, 917526, 1, 0, 917527, 1, 0, 983051, 1, 0, 983052, 1, 0, 983053, 1, 0, 983054, 1, 0, 983055, 1, 0, 983056, 1, 0, 983057, 1, 0, 983058, 1, 0, 983059, 1, 0, 983060, 1, 0, 983061, 1, 0, 983062, 1, 0, 983063, 1, 0, 1048587, 1, 0, 1048588, 1, 0, 1048589, 1, 0, 1048590, 1, 0, 1048591, 1, 0, 1048592, 1, 0, 1048593, 1, 0, 1048594, 1, 0, 1048595, 1, 0, 1048596, 1, 0, 1048597, 1, 0, 1048598, 1, 0, 1048599, 1, 0, 1114123, 1, 0, 1114124, 1, 0, 1114125, 1, 0, 1114126, 1, 0, 1114127, 1, 0, 1114128, 1, 0, 1114129, 1, 0, 1114130, 1, 0, 1114131, 1, 0, 1114132, 1, 0, 1114133, 1, 0, 1114134, 1, 0, 1114135, 1, 0 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1200, 900 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 534.288, 379.92 )
+texture = ExtResource( 3 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite4" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 3183.91, -508.595 )
+texture = ExtResource( 5 )
+offset = Vector2( -34.0544, 38.839 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 483.477, 175.264 )
+texture = ExtResource( 5 )
+offset = Vector2( -34.0544, 38.839 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 972.741, 113.279 )
+texture = ExtResource( 5 )
+offset = Vector2( -34.0544, 38.839 )
+
+[node name="Sprite3" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 1330.18, -78.2019 )
+texture = ExtResource( 5 )
+offset = Vector2( -34.0544, 38.839 )
+
+[node name="Sprite5" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 1992.1, -282.126 )
+texture = ExtResource( 5 )
+offset = Vector2( -34.0544, 38.839 )
+
+[node name="Sprite6" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( -3900.06, -446.109 )
+texture = ExtResource( 5 )
+offset = Vector2( 5615.48, 875.719 )
+
+[node name="Sprite7" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( -4352.56, -203.6 )
+texture = ExtResource( 5 )
+offset = Vector2( 5615.48, 875.719 )
+
+[node name="Sprite8" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( -3079.89, -652.911 )
+texture = ExtResource( 5 )
+offset = Vector2( 5615.48, 875.719 )
+
+[node name="Dude" parent="." instance=ExtResource( 2 )]
+position = Vector2( 512, 400 )
+
+[node name="Camera2D" type="Camera2D" parent="Dude"]
+current = true
+limit_left = -34
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+editor_draw_limits = true
+
+[node name="Reset" type="Area2D" parent="."]
+position = Vector2( 2076.96, 1009.57 )
+collision_layer = 0
+collision_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Reset"]
+shape = SubResource( 6 )
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Reset" to="Dude" method="_on_Reset_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

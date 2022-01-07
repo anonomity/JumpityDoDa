@@ -10,6 +10,7 @@ const DASHJUMP := -800.0
 const MAX_DASH_TIME := 0.1				# Dash time
 
 
+
 var jumpwall = 600
 var walljump	 = 1000
 var wall_jump_cooldown = 0
@@ -60,11 +61,13 @@ func _physics_process(_delta: float) -> void:
 			gravity = 0
 			if wall_jump_cooldown == 0:
 				if not is_on_floor() and nextToRightWall() and Input.is_action_pressed("jump") and RightWallJumpOver():
+					$JumpAudio.play()
 					sprite.play("climb_over")
 					print("jumping over")
 					velocity.x -= walljump
 					velocity.y -= jumpwall
 				if not is_on_floor() and nextToLeftWall() and Input.is_action_pressed("jump") and LeftWallJumpOver():
+					$JumpAudio.play()
 					sprite.play("climb_over")
 					velocity.x += walljump
 					velocity.y -= jumpwall
@@ -76,6 +79,7 @@ func _physics_process(_delta: float) -> void:
 		# Jumping
 		if Input.is_action_just_pressed("jump") and is_on_floor() and not next_to_wall():
 			sprite.play("jump")
+			$JumpAudio.play()
 			velocity.y = JUMPFORCE
 		# Variable jump
 		if Input.is_action_just_released("jump") and velocity.y < 0:
@@ -102,10 +106,12 @@ func _physics_process(_delta: float) -> void:
 		if dash_driection == Vector2.UP:
 			# Vertical dashing
 			sprite.play("dashup")
+			$DashAudio.play()
 			velocity.y = DASHJUMP
 		else:
 			# Horizontal dashing
 			sprite.play("dash")
+			$DashAudio.play()
 			velocity.x = DASHFORCE * get_look_direction()
 		
 	if dash_time > MAX_DASH_TIME:
@@ -158,10 +164,17 @@ func fall() -> void:
 	sprite.frame = 2
 
 
-# On fall death, reset the level
+# On fall death, reset t he level
 func _on_Reset_body_entered(_body: Node) -> void:
 # warning-ignore:return_value_discarded
-	get_tree().change_scene("res://Scenes/Level1.tscn")
+	$DeadAudio.play()
+	
 
 
-
+func _on_DeadAudio_finished():
+	Variables.score = 0
+	Variables.currentTime = 0
+	if(Variables.currentLevel == 1):
+		get_tree().change_scene("res://Scenes/Level1.tscn")
+	elif(Variables.currentLevel == 2):
+		get_tree().change_scene("res://Scenes/Level22.tscn")

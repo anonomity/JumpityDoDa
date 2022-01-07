@@ -11,6 +11,7 @@ func _ready() -> void:
 
 # Play a bounce animation
 func _on_Brocolli_body_entered(_body: Node) -> void:
+	Variables.inc_score(50)
 	# The bounce animation must be local to the node otherwise it will bounce near 0,0 of the level (top left)
 	# I changed it to bounce the sprite position not the parent node position (Brocolli)
 	animation.play("bounce")

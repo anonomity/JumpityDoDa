@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/Super-Mario-Bros--3.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://UI/controls.png" type="Texture" id=3]
+[ext_resource path="res://Audio/JumpityDoDa_SoundTrack.mp3" type="AudioStream" id=4]
 
 [sub_resource type="Theme" id=1]
 
@@ -115,12 +116,19 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 241.0
+margin_left = 240.078
 margin_top = 291.0
-margin_right = 712.0
+margin_right = 711.078
 margin_bottom = 481.0
 texture = ExtResource( 3 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_Start_pressed"]
